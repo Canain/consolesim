@@ -1,5 +1,7 @@
 'use strict';
 
+/// <reference path="typings/tsd.d.ts" />
+
 const emptyChar = ' ';
 const nonEmptyChar = '\u00b7';
 const width = 252;
@@ -110,12 +112,12 @@ map.push({
 	pos: [0, 10],
 	p: [1, 0]
 }, {
-	pos: [0, -10],
-	p: [-1, 0]
-}, {
-	pos: [0, 0],
-	p: [0, 0]
-});
+		pos: [0, -10],
+		p: [-1, 0]
+	}, {
+		pos: [0, 0],
+		p: [0, 0]
+	});
 
 
 // for (let i = 0; i < num; i++) {
@@ -130,30 +132,30 @@ let halfHeight = Math.floor(height / 2);
 
 function step() {
 	clear(display);
-	
+
 	map.forEach(obj => {
 		map.forEach(obj2 => {
 			if (obj === obj2) {
 				return;
 			}
-			
+
 			obj.p = add(obj.p, mult(gravForce(obj.pos, obj2.pos), deltat));
 		});
 	});
-	
+
 	map.forEach(obj => {
 		obj.pos = add(obj.pos, mult(obj.p, deltat));
 	});
-	
+
 	map.forEach(obj => {
 		let pos = obj.pos;
-		let y = halfHeight - Math.floor(pos[1]/ratio);
+		let y = halfHeight - Math.floor(pos[1] / ratio);
 		let x = halfWidth + Math.floor(pos[0]);
 		if (y > -1 && y < height && x > -1 && x < width) {
 			display[y][x] = 1;
 		}
 	});
-	
+
 	draw(display);
 }
 
